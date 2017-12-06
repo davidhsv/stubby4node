@@ -232,7 +232,11 @@ function compareObjects (configured, incoming) {
     if (typeof configured[key] !== typeof incoming[key]) { return false; }
 
     if (typeof configured[key] === 'object') {
-      if (!compareObjects(configured[key], incoming[key])) { return false; }
+      if (!compareObjects(configured[key], incoming[key])) { 
+        if (!matchRegex(configured[key], incoming[key])) {
+            return false;
+        }
+      }
     } else if (configured[key] !== incoming[key]) { return false; }
   }
 
